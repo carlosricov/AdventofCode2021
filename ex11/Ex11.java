@@ -1,13 +1,19 @@
 import java.util.*;
 import java.io.*;
 
+// Day 11.
 public class Ex11 {
   public static void main(String[] args) throws Exception {
     File f = new File("input.txt");
     Scanner in = new Scanner(f);
+
+    // Input is always given as a 10x10 grid.
     int[][] grid = new int[10][10];
+
+    // Total steps to process.
     final int steps = 100;
 
+    // Populate our grid as a 2d int array.
     int j = 0;
     while (in.hasNext()) {
       String line = in.nextLine();
@@ -20,12 +26,16 @@ public class Ex11 {
       j++;
     }
 
+    // Flashes occur when a cell hits > 9.
     int flashes = calcFlashes(grid, steps);
     System.out.println("Total flashes: " + flashes);
   }
 
+  // Counts the amount of flashes. Part 2 implementation.
   private static int calcFlashes(int[][] grid, int steps) {
       int result = 0;
+
+      // Stop the program once all are flashing.
       boolean allFlashing = checkFlashing(grid);
 
       int i = 0;
@@ -52,6 +62,7 @@ public class Ex11 {
     return true;
   }
 
+  // Uses BFS to update cells.
   private static int passOver(int[][] grid) {
     Queue<int[]> q = new LinkedList<>();
     boolean[][] visited = new boolean[grid.length][grid[0].length];

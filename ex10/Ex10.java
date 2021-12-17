@@ -1,11 +1,16 @@
 import java.io.*;
 import java.util.*;
 
+// Day 10.
 public class Ex10 {
   public static void main(String[] args) throws Exception {
     File f = new File("input.txt");
     Scanner in = new Scanner(f);
+
+    // Prevent overflow--use long.
     long[] score;
+
+
     List<String> uncorrupted = new ArrayList<>();
     List<List<Character>> auto = new ArrayList<>();
 
@@ -66,6 +71,7 @@ public class Ex10 {
     return scores;
   }
 
+  // Uses stack to process the parenthesis.
   private static List<Character> processNewLine(String line) {
     Stack<Character> s = new Stack<>();
     char[] arr = line.toCharArray();
