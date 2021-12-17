@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 
+// Day 12 - only part 1 is implemented.
 public class Ex12 {
   static Set<String> visitedPaths;
 
