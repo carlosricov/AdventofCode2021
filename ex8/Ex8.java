@@ -2,15 +2,20 @@ import java.io.*;
 import java.util.*;
 import java.time.*;
 
+// Day 8.
 public class Ex8 {
+  // Necessary segments in deciphering the digits.
   static String topSegment = "";
   static String middleSegment = "";
 
   public static void main(String[] args) throws Exception {
+    // Runtime calculation.
     long startTime = System.nanoTime();
+
     File f = new File("input.txt");
     Scanner in = new Scanner(f);
 
+    // 10 digts: 0 - 9.
     int[] digitCount = new int[10];
     int result = 0;
 

@@ -1,15 +1,23 @@
 import java.io.*;
 import java.util.*;
 
+// Day 9.
 public class Ex9 {
   public static void main(String[] args) throws Exception {
     File f = new File("input.txt");
     Scanner in = new Scanner(f);
 
+    // Create our 2d integer grid based on the input file.
     int[][] grid = populateArr(in);
+
+
     ArrayList<int[]> list = new ArrayList<>();
+
+    // Minheap.
     PriorityQueue<Integer> q = new PriorityQueue<>();
 
+    // Adds the coordinates for each valid basin starting point to our list by
+    // checking all possible neighbors.
     for (int i = 0; i < grid.length; i++) {
       for (int j = 0; j < grid[0].length; j++) {
         if (checkAbove(grid, j, i) && checkBelow(grid, j, i) && checkRight(grid, j, i) && checkLeft(grid, j, i)) {
@@ -18,12 +26,15 @@ public class Ex9 {
       }
     }
 
+    // Coordinates are stored in integer arrays of length 2.
     for (int[] coord : list) {
       int x = coord[0];
       int y = coord[1];
 
+      // Perform BFS to find basin areas.
       int size = bfs(grid, x, y);
 
+      // Minheap stores top 3 smallest basins.
       if (q.size() == 3) {
         if (q.peek() < size) {
           q.poll();
@@ -42,6 +53,7 @@ public class Ex9 {
     int k = 0;
     int product = 1;
 
+    // Resulting formula.
     for (Integer num : q) {
       product *= num;
     }
@@ -49,6 +61,7 @@ public class Ex9 {
     System.out.println("Result: " + product);
   }
 
+  // Standard bfs.
   private static int bfs(int[][] grid, int x, int y) {
     Queue<int[]> q = new LinkedList<>();
     boolean[][] visited = new boolean[grid.length][grid[0].length];
@@ -104,10 +117,9 @@ public class Ex9 {
     }
 
     return size;
-
   }
 
-
+  // Check the above neighbor of the cell if valid and larger.
   private static boolean checkAbove(int[][] grid, int x, int y) {
     if ((y - 1) < 0)
       return true;
@@ -115,6 +127,7 @@ public class Ex9 {
       return (grid[y][x] < grid[y - 1][x]);
   }
 
+  // Check the right neighbor of the cell if valid and larger.
   private static boolean checkRight(int[][] grid, int x, int y) {
     if ((x + 1) >= grid[0].length)
       return true;
@@ -122,6 +135,7 @@ public class Ex9 {
       return (grid[y][x] < grid[y][x + 1]);
   }
 
+  // Check the below neighbor of the cell if valid and larger.
   private static boolean checkBelow(int[][] grid, int x, int y) {
     if ((y + 1) >= grid.length)
       return true;
@@ -129,6 +143,7 @@ public class Ex9 {
       return (grid[y][x] < grid[y + 1][x]);
   }
 
+  // Check the left neighbor of the cell if valid and larger.
   private static boolean checkLeft(int[][] grid, int x, int y) {
     if ((x - 1) < 0)
       return true;
@@ -136,8 +151,10 @@ public class Ex9 {
       return (grid[y][x] < grid[y][x - 1]);
   }
 
+  // File read and populate array method.
   private static int[][] populateArr(Scanner in) {
     String line = in.nextLine();
+
     int[][] grid = new int[100][line.length()];
     char[] arr = line.toCharArray();
 
@@ -158,7 +175,6 @@ public class Ex9 {
       j++;
     }
 
-    // System.out.println("Grid: " + Arrays.deepToString(grid));
     return grid;
   }
 }

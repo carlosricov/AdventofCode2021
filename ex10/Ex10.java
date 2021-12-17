@@ -10,11 +10,13 @@ public class Ex10 {
     // Prevent overflow--use long.
     long[] score;
 
-
+    // Uncorrupted is a complete pairing: <> () {} [].
     List<String> uncorrupted = new ArrayList<>();
     List<List<Character>> auto = new ArrayList<>();
 
+    // Read and process the file as we read it.
     while (in.hasNext()) {
+      // Each line will be process character by character.
       String line = in.nextLine();
       char corrupted = processLine(line);
 
@@ -33,6 +35,7 @@ public class Ex10 {
       }
     }
 
+    // Calculate scores.
     score = calcScore(auto);
     Arrays.sort(score);
     System.out.println("Scores: " + Arrays.toString(score));
@@ -40,6 +43,7 @@ public class Ex10 {
 
   }
 
+  // Calculates score based on formula.
   private static long[] calcScore(List<List<Character>> list) {
     long[] scores = new long[list.size()];
 
